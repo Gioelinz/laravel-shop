@@ -12,7 +12,10 @@
 <body>
     @include('includes.header')
     
-    @yield('content')
+    <main>
+        @yield('content')
+    </main>
+
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
 
