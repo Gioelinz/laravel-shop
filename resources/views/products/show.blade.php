@@ -9,5 +9,10 @@
         <p>{{ $product->description }}</p>
         <div>{{ $product->price }}</div>
         <a href="{{ route('products.index') }}">Home</a>
+        <form action="{{ route('products.destroy', $product->id) }}" method="POST">
+            @method('DELETE')
+            @csrf
+            <button type="submit">Delete</button>
+        </form>
     </div>
 @endsection
