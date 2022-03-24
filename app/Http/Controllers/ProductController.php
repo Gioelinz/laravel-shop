@@ -37,7 +37,15 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+
+        ]);
+        $data = $request->all();
+        $product= new Product();
+        $comic->fill($data);
+        $comic->save();
+        return redirect()->route('products.index')
+
     }
 
     /**
