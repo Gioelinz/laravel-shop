@@ -9,7 +9,7 @@
                 </figure>
                 <h2 class="pt-2 text-uppercase">{{ $product->name }}</h2>
                 <p class="w-25 mx-auto">{{ $product->description }}</p>
-                <div class="pt-2">€{{ $product->price }}</div>
+                <div class="pt-2 fw-bold">€{{ $product->price }}</div>
                 <a href="{{ route('products.show', ['product' => $product->id]) }}">Dettagli</a>
             </li>
         @endforeach
