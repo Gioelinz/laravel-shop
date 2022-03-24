@@ -37,15 +37,26 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $request->validate(
+            [
+                'name' => 'required | min:2',
+                'description' => 'required | min:5',
+                'price' => 'required | numeric | min:1 | max:9999',
+                'image' => 'unique',
+            ],
+            [
+                'required' => 'il campo :attribute è obbligatorio',
+                'description.min' => 'La lunghezza minima è :min',
+                'price.min' => 'Il prezzo deve essere minimo :min',
+                'unique' => "L \'immagine $request->image"
 
-        ]);
+            ]
+        );
         $data = $request->all();
-        $product= new Product();
-        $comic->fill($data);
-        $comic->save();
-        return redirect()->route('products.index')
-
+        $product = new Product();
+        $product->fill($data);
+        $product->save();
+        return redirect()->route('products.index');
     }
 
     /**
