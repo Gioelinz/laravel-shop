@@ -11243,3 +11243,16 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+
+li{
+  list-style-type: none;
+}
+
+a{
+  text-decoration: none;
+  color: #0a53be;
+}
+
+body{
+  background-color: lightgray;
+}
