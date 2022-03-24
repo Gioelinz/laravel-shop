@@ -42,13 +42,13 @@ class ProductController extends Controller
                 'name' => 'required | min:2',
                 'description' => 'required | min:5',
                 'price' => 'required | numeric | min:1 | max:9999',
-                'image' => 'unique',
+                'image' => 'unique:products',
             ],
             [
                 'required' => 'il campo :attribute è obbligatorio',
                 'description.min' => 'La lunghezza minima è :min',
                 'price.min' => 'Il prezzo deve essere minimo :min',
-                'unique' => "L \'immagine $request->image"
+                'unique' => "L \'immagine $request->image è già presente!"
 
             ]
         );
