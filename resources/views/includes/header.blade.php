@@ -10,9 +10,12 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('products.index') }}">Products</a>
-                    </li>
+                        <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ route('products.index') }}">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ route('products.create') }}">Create a New Product</a>
+                </li>
                 </ul>
             </div>
         </div>

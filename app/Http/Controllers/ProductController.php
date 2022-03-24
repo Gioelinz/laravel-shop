@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Product;
+use Illuminate\Validation\Rule;
 
 class ProductController extends Controller
 {
@@ -26,7 +27,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('products.create');
     }
 
     /**
@@ -37,7 +38,26 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+            [
+                'name' => 'required | min:2',
+                'description' => 'required | min:5',
+                'price' => 'required | numeric | min:1 | max:9999',
+                'image' => 'unique:products',
+            ],
+            [
+                'required' => 'il campo :attribute è obbligatorio',
+                'description.min' => 'La lunghezza minima è :min',
+                'price.min' => 'Il prezzo deve essere minimo :min',
+                'unique' => "L \'immagine $request->image è già presente!"
+
+            ]
+        );
+        $data = $request->all();
+        $product = new Product();
+        $product->fill($data);
+        $product->save();
+        return redirect()->route('products.index');
     }
 
     /**
@@ -55,24 +75,42 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Product $product
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        //
+        return view('products.edit', compact('product'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Product $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
-        //
+        $request->validate(
+            [
+                'name' => 'required | min:2',
+                'description' => 'required | min:5',
+                'price' => 'required | numeric | min:1 | max:9999',
+                'image' => Rule::unique('products')->ignore($product->id),
+            ],
+            [
+                'required' => 'il campo :attribute è obbligatorio',
+                'description.min' => 'La lunghezza minima è :min',
+                'price.min' => 'Il prezzo deve essere minimo :min',
+                'unique' => "L \'immagine $request->image è già presente!"
+
+            ]
+        );
+
+        $data = $request->all();
+        $product->update($data);
+        return redirect()->route('products.show', $product);
     }
 
     /**
@@ -83,6 +121,10 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+
+        $product->delete();
+
+        return redirect()->route('products.index');
     }
 }
