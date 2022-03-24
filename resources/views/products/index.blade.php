@@ -1,15 +1,15 @@
 @extends('layouts.main')
 
 @section('content')
-<ul>
+<ul class="mt-4">
     @foreach ($products as $product)
-    <li>
+    <li class="text-center">
         <figure>
-            <img src="{{ $product->image }}" alt="">
+            <img class="img-fluid mt-3 rounded-pill" src="{{ $product->image }}" alt="">
         </figure>
-        <h2>{{ $product->name }}</h2>
+        <h2 class="pt-2 text-uppercase">{{ $product->name }}</h2>
         <p>{{ $product->description }}</p>
-        <div>{{ $product->price }}</div>
+        <div class="pt-2">{{ $product->price }}</div>
         <a href="{{ route('products.show', ['product' => $product->id]) }}">Dettagli</a>
     </li>
     @endforeach
