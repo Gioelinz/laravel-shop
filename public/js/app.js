@@ -19437,6 +19437,7 @@ __webpack_require__(/*! C:\Users\sange\Desktop\boolean\laravel\laravel-shop\reso
 module.exports = __webpack_require__(/*! C:\Users\sange\Desktop\boolean\laravel\laravel-shop\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
+
 /***/ })
 
 /******/ });
