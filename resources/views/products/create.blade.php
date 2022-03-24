@@ -1,10 +1,10 @@
 @extends('layouts.main')
 
 @section('content')
+<div class="container">  
+  <h2>Crea un nuovo prodotto</h2>
 
-<h2>Crea un nuovo prodotto</h2>
-
-<form  action="{{route('products.store')}}" method="POST">
+  <form  action="{{route('products.store')}}" method="POST">
     @csrf
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Inserisci nome</label>
@@ -19,10 +19,11 @@
       <input type="number" class="form-control" id="exampleCheck1" name="price">
     </div>
     <div class="mb-3 ">
-        <label class="-label" for="exampleCheck1">Inserisci link immagine</label>
-        <input type="string" class="form-control" id="exampleCheck1" name="image">
+      <label class="-label" for="exampleCheck1">Inserisci link immagine</label>
+      <input type="string" class="form-control" id="exampleCheck1" name="image">
       </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-success">Submit</button>
   </form>
-    
+  
+</div>
 @endsection
