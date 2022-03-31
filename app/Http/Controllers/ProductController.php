@@ -88,9 +88,10 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        $colors = Color::all();
         $colors_product_id = $product->colors->pluck('id')->toArray();
         $brands = Brand::all();
-        return view('products.edit', compact('product', 'brands', 'colors_product_id'));
+        return view('products.edit', compact('product', 'brands', 'colors_product_id', 'colors'));
     }
 
     /**
