@@ -2,7 +2,7 @@
 
 @section('content')
     <div>
-        <ul class="mt-4">
+        <ul class="mt-4 list-unstyled">
             <li class="text-center">
                 <figure>
                     <img class="img-fluid mt-3 rounded-pill" src="{{ $product->image }}" alt="">
@@ -10,6 +10,21 @@
                 <h2 class="pt-2 text-uppercase">{{ $product->name }}</h2>
                 <p class="w-25 mx-auto">{{ $product->description }}</p>
                 <div class="pt-2">{{ $product->price }}</div>
+                <h5>
+                    <span
+                        class="badge rounded-pill bg-{{ $product->brand->color ?? 'dark' }}">{{ $product->brand->name ?? '-' }}</span>
+                </h5>
+
+                <h5>Colori:</h5>
+                @forelse ($product->colors as $color)
+                    <h5>
+                        <span class="badge bg-secondary">{{ $color->color }}</span>
+                    </h5>
+                @empty
+                    <h5>
+                        <span class="badge bg-secondary">Colore Sconosciuto</span>
+                    </h5>
+                @endforelse
                 <a class="btn btn-info" href="{{ route('products.index') }}">Home</a>
                 <a class="btn btn-primary" href="{{ route('products.edit', ['product' => $product->id]) }}">Modifica</a>
 
