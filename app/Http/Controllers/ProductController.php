@@ -121,6 +121,10 @@ class ProductController extends Controller
 
         $data = $request->all();
         $product->update($data);
+
+        if (array_key_exists('colors', $data)) $product->colors()->sync($data['colors']);
+        else $product->colors()->detach();
+
         return redirect()->route('products.show', $product);
     }
 
