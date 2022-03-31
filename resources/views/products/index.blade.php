@@ -10,6 +10,9 @@
                 <h2 class="pt-2 text-uppercase">{{ $product->name }}</h2>
                 <p class="w-25 mx-auto">{{ $product->description }}</p>
                 <div class="pt-2 fw-bold">€{{ $product->price }}</div>
+                <h5>
+                    <span class="badge badge-pill badge-{{$product->brands->color ?? 'dark'}}">{{$product->brands->name ?? '-'}}</span>
+                </h5>
                 <a href="{{ route('products.show', ['product' => $product->id]) }}">Dettagli</a>
             </li>
         @endforeach
