@@ -32,7 +32,17 @@
             </div>
             <div class="mb-3">
                 <label for="image" class="form-label">Immagine</label>
-                <input type="text" class="form-control" id="image" name="image" value="{{ old('image', $product->image)  }}">
+                <input type="text" class="form-control" id="image" name="image"
+                    value="{{ old('image', $product->image) }}">
+            </div>
+            <div class="mb-3 ">
+                <select class="form-select @error('brand_id') is-invalid @enderror" name="brand_id">
+                    <option value="">Nessuna Marca</option>
+                    @foreach ($brands as $brand)
+                        <option value="{{ $brand->id }}" @if (old('brand_id', $product->brand->id) == $brand->id) selected @endif>
+                            {{ $brand->name }}</option>
+                    @endforeach
+                </select>
             </div>
             <button type="submit" class="btn btn-success">Conferma</button>
         </form>

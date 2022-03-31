@@ -33,6 +33,15 @@
                 <label class="-label" for="exampleCheck1">Inserisci link immagine</label>
                 <input type="string" class="form-control" id="exampleCheck1" name="image">
             </div>
+            <div class="mb-3 ">
+                <select class="form-select @error('brand_id') is-invalid @enderror" name="brand_id">
+                    <option value="">Nessuna Marca</option>
+                    @foreach ($brands as $brand)
+                        <option value="{{ $brand->id }}" @if (old('brand_id', $brand->id) == $brand->id) selected @endif>
+                            {{ $brand->name }}</option>
+                    @endforeach
+                </select>
+            </div>
             <button type="submit" class="btn btn-success">Submit</button>
         </form>
 

@@ -11,7 +11,8 @@ class Brand extends Model
         'color'
     ];
 
-    public function products(){
+    public function products()
+    {
         return $this->hasMany('App\Models\Product');
     }
 }

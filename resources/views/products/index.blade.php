@@ -11,8 +11,15 @@
                 <p class="w-25 mx-auto">{{ $product->description }}</p>
                 <div class="pt-2 fw-bold">€{{ $product->price }}</div>
                 <h5>
-                    <span class="badge badge-pill badge-{{$product->brands->color ?? 'dark'}}">{{$product->brands->name ?? '-'}}</span>
+                    <span
+                        class="badge rounded-pill bg-{{ $product->brand->color ?? 'dark' }}">{{ $product->brand->name ?? '-' }}</span>
                 </h5>
+
+                @forelse ($product->colors as $color)
+                    <p>{{ $color->color }}</p>
+                @empty
+                    <p>Colore Sconosciuto</p>
+                @endforelse
                 <a href="{{ route('products.show', ['product' => $product->id]) }}">Dettagli</a>
             </li>
         @endforeach

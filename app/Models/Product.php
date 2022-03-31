@@ -10,9 +10,16 @@ class Product extends Model
         'name',
         'description',
         'price',
-        'image'
+        'image',
+        'brand_id'
     ];
-    public function brands(){
+    public function brand()
+    {
         return $this->belongsTo('App\Models\Brand');
+    }
+
+    public function colors()
+    {
+        return $this->belongsToMany('App\Models\Color');
     }
 }

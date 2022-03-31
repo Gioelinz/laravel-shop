@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use Illuminate\Http\Request;
 
 use App\Models\Product;
 use Illuminate\Validation\Rule;
+
 
 class ProductController extends Controller
 {
@@ -27,7 +29,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+
+        $brands = Brand::all();
+        return view('products.create', compact('brands'));
     }
 
     /**
@@ -44,6 +48,7 @@ class ProductController extends Controller
                 'description' => 'required | min:5',
                 'price' => 'required | numeric | min:1 | max:9999',
                 'image' => 'unique:products',
+                'brand_id' => 'nullable|exists:brands,id'
             ],
             [
                 'required' => 'il campo :attribute è obbligatorio',
@@ -80,7 +85,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('products.edit', compact('product'));
+        $brands = Brand::all();
+        return view('products.edit', compact('product', 'brands'));
     }
 
     /**
