@@ -39,7 +39,7 @@
                 <select class="form-select @error('brand_id') is-invalid @enderror" name="brand_id">
                     <option value="">Nessuna Marca</option>
                     @foreach ($brands as $brand)
-                        <option value="{{ $brand->id }}" @if (old('brand_id', $brand->id) == $brand->id) selected @endif>
+                        <option value="{{ $brand->id }}" @if (old('brand_id ', $product->brand_id) == $brand->id) selected @endif>
                             {{ $brand->name }}</option>
                     @endforeach
                 </select>

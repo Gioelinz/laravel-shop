@@ -2,9 +2,14 @@
 
 @section('content')
     <div class="container">
+        @forelse ($brands as $brand)
+            <button class="btn btn-dark mb-4 {{ !count($brand->products) ? 'disabled' : '' }}">
+                {{ $brand->name }} <span class="badge bg-primary">{{ count($brand->products) }}</span>
+            </button>
+        @empty
+        @endforelse
 
         <div class="row">
-
             @foreach ($products as $product)
                 <div class="col-4">
                     <div class="text-center">
