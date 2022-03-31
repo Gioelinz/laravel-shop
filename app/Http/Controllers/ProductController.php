@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
+use App\Models\Color;
 use Illuminate\Http\Request;
 
 use App\Models\Product;
@@ -29,9 +30,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-
+        $colors = Color::all();
         $brands = Brand::all();
-        return view('products.create', compact('brands'));
+        return view('products.create', compact('brands', 'colors'));
     }
 
     /**
@@ -48,7 +49,8 @@ class ProductController extends Controller
                 'description' => 'required | min:5',
                 'price' => 'required | numeric | min:1 | max:9999',
                 'image' => 'unique:products',
-                'brand_id' => 'nullable|exists:brands,id'
+                'brand_id' => 'nullable|exists:brands,id',
+                'colors' => 'nullable | exists:colors,id',
             ],
             [
                 'required' => 'il campo :attribute è obbligatorio',
@@ -62,6 +64,7 @@ class ProductController extends Controller
         $product = new Product();
         $product->fill($data);
         $product->save();
+        if (array_key_exists('colors', $data)) $product->colors()->attach($data['colors']);
         return redirect()->route('products.index');
     }
 
@@ -85,8 +88,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        $colors_product_id = $product->colors->pluck('id')->toArray();
         $brands = Brand::all();
-        return view('products.edit', compact('product', 'brands'));
+        return view('products.edit', compact('product', 'brands', 'colors_product_id'));
     }
 
     /**
