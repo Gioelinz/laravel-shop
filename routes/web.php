@@ -14,8 +14,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', function () {
-    return view('home');
-});
+/* Route::get('/', function () {
+    return view('guesthome');
+}); */
 
 Route::resource('products', 'ProductController');
+
+Auth::routes();
+
+Route::get('/admin', 'HomeController@index')->name('home');
+
+Route::get('{any?}', function () {
+    return view('guesthome');
+})->where('any', '.*');
