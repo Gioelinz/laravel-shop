@@ -13,6 +13,8 @@ class CreateColorProductTable extends Migration
      */
     public function up()
     {
+
+         // TEST 
         Schema::create('color_product', function (Blueprint $table) {
 
             $table->unsignedBigInteger('color_id');
